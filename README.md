@@ -1,13 +1,11 @@
 
 *******************************************************************************************************************************************************************
----
----
+
 # SmartReact — E-commerce Backend
 
 This is the **Laravel backend** for the **E-commerce System (SmartReach)**.
 It provides **REST APIs** for managing **users, products, carts, and orders**, integrates with a **React frontend**, and follows **modern Laravel development best practices**.
 
----
 *******************************************************************************************************************************************************************
 ---
 
