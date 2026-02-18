@@ -7,10 +7,7 @@ This is the **Laravel backend** for the **E-commerce System (SmartReach)**.
 It provides **REST APIs** for managing **users, products, carts, and orders**, integrates with a **React frontend**, and follows **modern Laravel development best practices**.
 
 *******************************************************************************************************************************************************************
----
-
 ## Project Overview
-
 *******************************************************************************************************************************************************************
 
 ### Key Features
@@ -49,9 +46,6 @@ It provides **REST APIs** for managing **users, products, carts, and orders**, i
 
 > All versions are listed in `composer.json` and `.env`.
 
----
-
----
 
 *******************************************************************************************************************************************************************
 ## Project Structure
@@ -78,10 +72,7 @@ database/
 * Controllers handle validation, business logic, and JSON responses.
 * Migrations define table schemas automatically for quick setup.
 
----
-
 *******************************************************************************************************************************************************************
----
 
 ## Setup Instructions
 
@@ -140,10 +131,7 @@ php artisan serve
 * Backend runs at `http://127.0.0.1:8000`
 * API endpoints are accessible at `http://127.0.0.1:8000/api`
 
----
-
 *******************************************************************************************************************************************************************
----
 
 ## Authentication & Roles
 
@@ -201,8 +189,6 @@ fetch(`${environment.serverUrl}/products`)
 
 ---
 
----
-
 ## Application Features
 
 ### Admin Features
@@ -228,8 +214,6 @@ fetch(`${environment.serverUrl}/products`)
 
 ---
 
----
-
 ## Best Practices Followed
 
 * Built-in Laravel validation for all requests
@@ -240,17 +224,11 @@ fetch(`${environment.serverUrl}/products`)
 
 ---
 
-*******************************************************************************************************************************************************************
----
-
 ## Testing
 
 * APIs tested with Postman for responses, status codes, and validation errors
 * Integrated with React frontend after testing for smooth communication
 
----
-
-*******************************************************************************************************************************************************************
 ---
 
 ## Future Enhancements
@@ -260,10 +238,6 @@ fetch(`${environment.serverUrl}/products`)
 * Unit testing for APIs
 * Dockerize backend for deployment
 * Rate limiting and caching for large datasets
-
----
-
-*******************************************************************************************************************************************************************
 
 *******************************************************************************************************************************************************************
 
