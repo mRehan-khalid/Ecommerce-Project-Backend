@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -24,3 +25,7 @@ Route::get('searchProduct/{key}', [\App\Http\Controllers\ProductController::clas
 Route::post('/addToCart/{product_id}', [\App\Http\Controllers\CartController::class, 'addToCart']); 
 Route::get('/userCart/{user_id}', [\App\Http\Controllers\CartController::class, 'userCart']);   
 Route::post('/checkout', [\App\Http\Controllers\CartController::class, 'checkout']);   
+Route::put('/updateCartQuantity/{id}', [CartController::class, 'updateQuantity']);
+Route::delete('/removeCartItem/{id}', [CartController::class, 'removeCartItem']);
+Route::get('/cartCount/{userId}', [CartController::class, 'getCartCount']);
+Route::get('/userOrders/{userId}', [OrderController::class, 'getUserOrdersHistory']);

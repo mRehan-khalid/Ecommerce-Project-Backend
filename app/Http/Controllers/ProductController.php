@@ -21,7 +21,9 @@ class ProductController extends Controller
 
     function productsList()
     {
-        return Product::all();
+        $perPage = 10;
+        $products = Product::paginate($perPage);
+        return $products;
     }
 
     function deleteProduct($id)
@@ -64,6 +66,6 @@ class ProductController extends Controller
 
     function searchProduct($key)
     {
-        return Product::where('product_name', 'LIKE', "%$key%")->get();
+        return Product::where('product_name', 'LIKE', "%$key%") ->paginate(10);
     }
 }

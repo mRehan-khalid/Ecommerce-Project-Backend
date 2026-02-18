@@ -11,22 +11,19 @@ use App\Models\User;
 
 class CartController extends Controller
 {
-    public function addToCart(Request $request, $product_id)
+     function addToCart(Request $request, $product_id)
     {
-        // user_id body se le lo
         $user_id = $request->input('user_id');
 
         if (!$user_id) {
             return response()->json(['status' => 400, 'message' => 'User ID missing'], 400);
         }
 
-        // check if product already in cart
         $cartItem = Cart::where('user_id', $user_id)
                         ->where('product_id', $product_id)
                         ->first();
 
         if ($cartItem) {
-            // agar hai to quantity +1
             $cartItem->quantity += 1;
             $cartItem->save();
 
@@ -66,29 +63,25 @@ function checkout(Request $request)
         return response()->json(['status' => 400, 'message' => 'User ID missing'], 400);
     }
 
-    // Get user's cart items with product info
     $cartItems = Cart::with('product')->where('user_id', $user_id)->get();
 
     if ($cartItems->isEmpty()) {
         return response()->json(['status' => 400, 'message' => 'Cart is empty'], 400);
     }
 
-    // Calculate total
     $totalAmount = 0;
     $totalAmount = 0;
         foreach ($cartItems as $item) {
-            $price = (float) $item->product->product_price; // convert string to float
+            $price = (float) $item->product->product_price; 
             $totalAmount += $price * $item->quantity;
         }
 
-    // Create order
     $order = Order::create([
         'user_id' => $user_id,
         'total_amount' => $totalAmount,
         'status' => 'placed'
     ]);
 
-    // Save order items
     foreach ($cartItems as $item) {
         OrderItem::create([
             'order_id' => $order->id,
@@ -98,7 +91,6 @@ function checkout(Request $request)
         ]);
     }
 
-    // Clear user's cart
     Cart::where('user_id', $user_id)->delete();
 
     return response()->json([
@@ -108,4 +100,39 @@ function checkout(Request $request)
         'total_amount' => $totalAmount
     ]);
 }
+
+ function updateQuantity(Request $request, $id)
+{
+    $cartItem = Cart::find($id);
+    if (!$cartItem) {
+        return response()->json(['message' => 'Cart item not found'], 404);
+    }
+
+    $cartItem->quantity = $request->quantity;
+    $cartItem->save();
+
+    return response()->json([
+        'message' => 'Quantity updated successfully',
+        'cartItem' => $cartItem
+    ]);
+}
+
+function removeCartItem($id) {
+    $cartItem = Cart::find($id);
+    if ($cartItem) {
+        $cartItem->delete();
+        return response()->json(['message' => 'Item removed from cart']);
+    } else {
+        return response()->json(['message' => 'Cart item not found'], 404);
+    }
+
+    }
+    function getCartCount($userId)
+   {
+       $totalQuantity = Cart::where('user_id', $userId)->sum('quantity');
+
+       return response()->json([
+           'count' => $totalQuantity
+       ]);
+   }
 }

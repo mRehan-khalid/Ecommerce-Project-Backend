@@ -25,11 +25,19 @@ class UserController extends Controller
         return response()->json($user, 201);
     }
 
-    function login(Request $req){
-        $user = User::where('email', $req->email)->first();
-        if(!$user || !Hash::check($req->password, $user->password)){
-            return ["error" => "Email or password is not correct"];
-        }
-        return $user;
+function login(Request $req){
+
+    $user = User::where('email', $req->email)->first();
+    if(!$user || !Hash::check($req->password, $user->password)){
+        return response()->json([
+            "success" => false,
+            "message" => "Email or password is not correct"
+        ], 401);
     }
+    return response()->json([
+        "success" => true,
+        "message" => "Login successful",
+        "user" => $user
+    ], 200);
+}
 }
