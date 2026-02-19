@@ -55,7 +55,7 @@ class ProductController extends Controller
             $product->product_price = $req->input('product_price', $product->product_price);
             $product->description = $req->input('description', $product->description);
             if ($req->hasFile('file_path')) {
-                $product->file_path = $req->file('file_path')->store('products');
+                $product->file_path = $req->file('file_path')->store('products', 'public');
             }
             $product->save();
             return $product;
